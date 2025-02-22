@@ -247,7 +247,10 @@ def rect_to_edges(rect: T_obj) -> T_obj_list:
 
 def line_to_edge(line: T_obj) -> T_obj:
     edge = dict(line)
-    edge["orientation"] = "h" if (line["top"] == line["bottom"]) else "v"
+    if abs(line["top"] - line["bottom"]) < 1.0:
+        edge["orientation"] = "h"
+    else:
+        edge["orientation"] = "v"
     return edge
 
 
